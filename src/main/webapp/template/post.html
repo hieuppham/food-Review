@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/frontend :: head}">
+</head>
+<body>
+<link rel="stylesheet" href="/css/imgpopup.css">
+<nav th:replace="~{fragment/frontend :: navigation}"></nav>
+<div th:object="${post}">
+    <!-- Page Header-->
+    <header class="masthead"
+            th:style="'background-image' +':' +  'url(' + 'https://drive.google.com/uc?export=view&id='+ *{images[0]}+')'">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <h1 th:text="*{title}">Man must explore, and this is exploration at its greatest</h1>
+                        <h2 class="subheading"><span th:each="text : *{hashtags}" th:text="'#'+ ${text} + ' '"></span>
+                        </h2>
+                        <span class="meta">
+                                Posted by
+                                <a th:text="*{name}" href="#!">Start Bootstrap</a>
+                                on <span th:text="*{date}">August 24, 2021</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content-->
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!--                    popup-->
+                    <div class="popup">
+                        <div style="display:none;">
+                            <div id="ninja-slider">
+                                <div class="slider-inner">
+                                    <ul>
+                                        <li th:each="img : *{images}">
+                                            <a class="ns-img"
+                                               th:href="@{https://drive.google.com/uc(export='view', id=${img})}"></a>
+                                        </li>
+                                    </ul>
+                                    <div id="fsBtn" class="fs-icon" title="Expand/Close"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="max-width:700px;margin:30px auto;">
+                            <div class="gallery">
+                                <img th:each="img : *{images}"
+                                     th:src="@{https://drive.google.com/uc(export='view', id=${img})}"
+                                     th:onclick="lightbox(0)" style="width:auto; height:140px;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    text-->
+                    <span th:text="*{content}">
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+
+<section style="background-color: #eee;">
+    <div class="container my-5 py-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <div class="card">
+                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                        <form action="/comment?action=addComment" method="POST">
+                            <div class="d-flex flex-start w-100">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                     src="/image/img/user.svg" alt="avatar"
+                                     width="40" height="40"/>
+                                <input type="hidden" name="post_id" th:value="${post._id}">
+                                <input class="comment" id="user-name" type="hidden" name="name" >
+                                <input class="comment" id="user-contact" type="hidden" name='contact' >
+                                <div class="form-outline w-100">
+                                    <textarea name="content" class="comment form-control"
+                                              id="textAreaExample"
+                                              rows="4" style="background: #fff;"
+                                              required></textarea>
+                                </div>
+                            </div>
+                            <div class="float-end mt-2 pt-1">
+                                <button type="submit" class="comment btn btn-primary btn-sm">Post comment</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div th:each="comment : ${listComment}">
+                        <div class="card-body">
+                            <div class="d-flex flex-start align-items-center">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                     src="/image/img/user.svg" alt="avatar"
+                                     width="60" height="60"/>
+                                <div>
+                                    <h6 th:text="${comment.name}" class="fw-bold text-primary mb-1">Lily Coleman</h6>
+                                    <p th:text="${comment.date}" class="text-muted small mb-0">
+                                        Shared publicly - Jan 2020
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p th:text="${comment.content}" class="mt-3 mb-4 pb-2">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip consequat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragment/frontend :: footer}"></footer>
+<div th:replace="~{fragment/frontend :: script}"></div>
+<script src="/js/imgpopup.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/frontend :: head}">
+</head>
+<body>
+<nav th:replace="~{fragment/frontend :: navigation}"></nav>
+
+<header class="masthead" style="background-image: url('/image/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Thought about your dish.</h1>
+                    <!--                                        <span class="subheading"></span>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<form action="/addPost" method="post">
+    <input type="text" id="name" name="name" placeholder="Name"><br>
+    <input type="text" id="contact" name="contact" value="" placeholder="Contact"><br>
+    <ul id="images">
+        <li><input type="text" name="images" placeholder="link"></li>
+    </ul>
+    <input type="text" name="title" placeholder="Title"><br>
+    <input type="text" name="hashtags" placeholder="hashtag1 hashtag2">
+    <textarea name="content" id="" cols="30" rows="10" placeholder="Write your review"></textarea>
+    <button type="submit">Post</button>
+</form>
+<button type="button" onclick="addImage()">+</button>
+<footer th:replace="~{fragment/frontend :: footer}"></footer>
+<div th:replace="~{fragment/frontend :: script}"></div>
+<script>
+
+</script>
+</body>
+</html>
