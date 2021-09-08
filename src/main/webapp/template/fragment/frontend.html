@@ -35,7 +35,7 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/write">Write</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">API</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/video">Video</a></li>
                 <li class="nav-item">
                     <div class="dropdown">
                         <!--                        guest-->
@@ -48,13 +48,12 @@
                         <!--                        user-->
                         <a class="user d-none nav-link px-lg-3 py-3 py-lg-4"
                            href="#"
-                           data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser"><span class="name"></span></a>
+                           data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser"><span class="user-name"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownUser">
-                            <li><img src="" alt="" class="avatar rounded-circle shadow-1-strong me-3" width="80"
+                            <li><img class="user-avatar rounded-circle shadow-1-strong me-3" width="80"
                                      height="80"></li>
-                            <li><h2 class="name"></h2></li>
-                            <li><p id="email"></p></li>
-                            <li><p id="phone"></p></li>
+                            <li><h2 class="user-name"></h2></li>
+                            <li><p class="user-contact"></p></li>
                             <li><a class="dropdown-item" onclick="firebase.auth().signOut()">Sign Out</a></li>
                         </ul>
                     </div>

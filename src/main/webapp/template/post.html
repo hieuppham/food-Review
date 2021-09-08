@@ -56,29 +56,31 @@
                         </div>
                     </div>
                     <!--                    text-->
-                    <span th:text="*{content}">
+                    <div th:each="map : *{getParas().entrySet()}">
+                        <h3 th:text="${map.getKey()}"></h3>
+                        <p th:text="${map.getValue()}"></p>
+                    </div>
 
-                    </span>
                 </div>
             </div>
         </div>
     </article>
 </div>
-
+<!--comment-->
 <section style="background-color: #eee;">
     <div class="container my-5 py-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12 col-lg-10 col-xl-8">
                 <div class="card">
                     <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-                        <form action="/comment?action=addComment" method="POST">
+                        <form action="/comment?action=addComment" method="POST" onkeyup="blankCheck()">
                             <div class="d-flex flex-start w-100">
                                 <img class="rounded-circle shadow-1-strong me-3"
                                      src="/image/img/user.svg" alt="avatar"
                                      width="40" height="40"/>
-                                <input type="hidden" name="post_id" th:value="${post._id}">
-                                <input class="comment" id="user-name" type="hidden" name="name" >
-                                <input class="comment" id="user-contact" type="hidden" name='contact' >
+                                <input type="hidden" name="post_id" th:value="${post._id}" >
+                                <input class="user-name" type="text" name="name" placeholder="Name" required>
+                                <input class="user-contact"  type="text" name='contact' placeholder="Contact" >
                                 <div class="form-outline w-100">
                                     <textarea name="content" class="comment form-control"
                                               id="textAreaExample"

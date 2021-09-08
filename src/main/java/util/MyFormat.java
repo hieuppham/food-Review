@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MyFormat {
     public static List<String> toListString(String str) {
-        return Arrays.asList(str.split(" "));
+        return Arrays.asList(str.split("#"));
     }
 
     // SQL date (datetime) use YYYY-MM-DD hh:mm:ss
@@ -21,7 +21,7 @@ public class MyFormat {
         for (String str : list) {
             strbul.append(str);
             //for adding comma between elements
-            strbul.append(" ");
+            strbul.append("#");
         }
         //just for removing last comma
         strbul.setLength(strbul.length() - 1);
@@ -29,11 +29,20 @@ public class MyFormat {
         return str;
     }
 
-    public static String urlsToIds(String[] urls) {
+    public static String urlsToString(String[] urls) {
         List<String> list = new ArrayList<>();
         for (String url : urls) {
+            //
             list.add(url.substring(url.indexOf("/d/") + 3, url.indexOf("/view")));
         };
+        return toString(list);
+    }
+
+    public static String arrToString(String[] arr){
+        List<String> list = new ArrayList<>();
+        for(String elem :arr){
+            list.add(elem.trim());
+        }
         return toString(list);
     }
 }

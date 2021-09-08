@@ -23,7 +23,7 @@ public class PostService {
         return new PostDAO().getPostById(id);
     }
 
-    public void addPost(String title, String content, String images, String hashtags, String name, String contact) {
-        new PostDAO.addPost(title, content, images, hashtags, name, contact);
+    public void addPost(String title, String headers,String contents, String images, String hashtags, String name, String contact) {
+        new PostDAO.addPost(title, headers,contents, images, hashtags, name, contact);
     }
 }

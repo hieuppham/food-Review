@@ -18,9 +18,11 @@ const uiConfig = {
     signInFlow: "popup",
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+        {
+            provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+            defaultCountry: 'VN',
+        },
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
         signInSuccessWithAuthResult: function (authResult) {
@@ -36,24 +38,25 @@ ui.start("#firebaseui-auth-container", uiConfig);
 function handleSignedInUser(user) {
     $(".guest").addClass("d-none");
     $(".user").removeClass("d-none");
-    $(".name").text(user.displayName ? user.displayName : "Anonymous");
-    $("#phone").text(user.phoneNumber);
-    $("#email").text(user.email);
-    user.photoURL
-        ? $(".avatar").attr("src", user.photoURL)
-        : $(".avatar").attr("src", "/image/img/user.svg");
+
+    $(".user-name").text(user.displayName ? user.displayName : "Anonymous");
+    $("p.user-contact").text(user.email ? user.email : user.phoneNumber);
+    $("img.user-avatar").attr("src", user.photoURL ? user.photoURL : "/image/img/user.svg");
+
+
+    $("input.user-name").val(user.displayName);
+    if (user.displayName) {
+        $("input.user-name").attr("readonly", " readonly");
+    }
+
+    $("input.user-contact").val(user.email ? user.email : user.phoneNumber);
+    $("input.user-contact").attr("readonly", "readonly");
+
     $(".comment").removeAttr("disabled");
     $("textarea.comment").attr("placeholder", "Type your comment.");
 
-    if(!user.displayName){
-        $('#user-name').attr("type", 'text');
-        $("#user-name").attr("placeholder", 'Your name');
-        //check phoneNumber but user can type his/her email as well.
-        if(!user.phoneNumber){
-            $("#user-contact").attr("type", "text");
-            $("#user-contact").attr("placeholder", "Your contact");
-        }
-    }
+    $("button.add-post").removeAttr("disabled");
+    $("textarea.post-content").attr("placeholder", "Write your review.");
 }
 
 function handleSignedOutUser() {
@@ -62,5 +65,6 @@ function handleSignedOutUser() {
     $(".guest").removeClass("d-none");
     $(".comment").attr("disabled", "disabled");
     $("textarea.comment").attr("placeholder", "You have to login to post comment.");
-
+    $("button.add-post").attr("disabled", "disabled");
+    $("textarea.post-content").attr("placeholder", "You have to login to post your review.");
 }

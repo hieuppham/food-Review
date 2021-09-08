@@ -14,15 +14,20 @@ public class AddPostController implements IController{
     public void process(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, ITemplateEngine templateEngine) throws Exception {
         request.setCharacterEncoding("UTF-8");
         if (request.getMethod().equalsIgnoreCase("post")) {
-            String title = request.getParameter("title");
-            String content = request.getParameter("content");
-            String name = request.getParameter("name");
-            String contact = request.getParameter("contact");
+            String title = request.getParameter("title").trim();
+            String name = request.getParameter("name").trim();
+            String contact = request.getParameter("contact").trim();
             String[] urls = request.getParameterValues("images");
-            String images = MyFormat.urlsToIds(urls);
-            String hashtags = request.getParameter("hashtags");
-            new PostService().addPost(title, content, images, hashtags, name, contact);
-            response.sendRedirect("/write");
+            String[] arrHeaders = request.getParameterValues("headers");
+            String[] arrContents =request.getParameterValues("contents");
+            String[] arrHashtags = request.getParameterValues("hashtags");
+
+            String images = MyFormat.urlsToString(urls);
+            String headers = MyFormat.arrToString(arrHeaders);
+            String contents = MyFormat.arrToString(arrContents);
+            String hashtags = MyFormat.arrToString(arrHashtags);
+            new PostService().addPost(title, headers, contents, images, hashtags, name, contact);
+            response.sendRedirect("/");
         }
     }
 }

@@ -5,35 +5,59 @@
 <body>
 <nav th:replace="~{fragment/frontend :: navigation}"></nav>
 
-<header class="masthead" style="background-image: url('/image/img/home-bg.jpg')">
+<header class="masthead" style="background-image: url('/image/img/write-bg.jpg')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Thought about your dish.</h1>
+                    <h1>About your dish</h1>
                     <!--                                        <span class="subheading"></span>-->
                 </div>
             </div>
         </div>
     </div>
 </header>
+<div class="container">
+    <form action="/addPost" method="post" onkeyup="blankCheck()">
+        <input type="text" class="user-name" name="name" placeholder="Name" required>
+        <br>
+        <input type="text" class="user-contact" name="contact" placeholder="Contact" >
+        <br>
+        <ul id="images" class="list-group list-group-flush">
+            <li class="list-group-item"><input type="text" name="images" placeholder="link" required></li>
+        </ul>
+        <br>
+        <button class="btn btn-primary" type="button" onclick="addImage()">Add Image</button>
+        <button class="btn btn-primary" type="button" onclick="removeImage()">Remove Image</button>
+        <br>
+        <input type="text" name="title" placeholder="Title" required>
+        <br>
+        <ul id="hashtags" class="list-group list-group-flush">
+            <li class="list-group-item"><input type="text" name="hashtags" placeholder="Hashtag" required></li>
+        </ul>
+        <br>
+        <button class="btn btn-primary" type="button" onclick="addHashtag()">Add Hashtag</button>
+        <button class="btn btn-primary" type="button" onclick="removeHashtag()">Remove Hashtag</button>
+        <br>
+        <ul id="paragraphs" class="list-group list-group-flush">
+            <li class="list-group-item">
+                <input type="text" name="headers" placeholder="Header" required>
+                <br>
+                <textarea class="post-content" name="contents" cols="30" rows="10" placeholder="Write your review"
+                        required  ></textarea>
+            </li>
+        </ul>
+        <br>
+        <button class="btn btn-primary" type="button" onclick="addParagraph()">Add Paragraph</button>
+        <button class="btn btn-primary" type="button" onclick="removeParagraph()">Remove Paragraph</button>
+        <br>
+        <br>
+        <button type="submit" class="add-post btn btn-primary">Post</button>
+    </form>
+</div>
 
-<form action="/addPost" method="post">
-    <input type="text" id="name" name="name" placeholder="Name"><br>
-    <input type="text" id="contact" name="contact" value="" placeholder="Contact"><br>
-    <ul id="images">
-        <li><input type="text" name="images" placeholder="link"></li>
-    </ul>
-    <input type="text" name="title" placeholder="Title"><br>
-    <input type="text" name="hashtags" placeholder="hashtag1 hashtag2">
-    <textarea name="content" id="" cols="30" rows="10" placeholder="Write your review"></textarea>
-    <button type="submit">Post</button>
-</form>
-<button type="button" onclick="addImage()">+</button>
 <footer th:replace="~{fragment/frontend :: footer}"></footer>
 <div th:replace="~{fragment/frontend :: script}"></div>
-<script>
 
-</script>
 </body>
 </html>

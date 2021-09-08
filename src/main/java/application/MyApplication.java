@@ -31,6 +31,7 @@ public class MyApplication {
         this.controllersByURL.put("/comment", new CommentController());
         this.controllersByURL.put("/write", new WriteController());
         this.controllersByURL.put("/addPost", new AddPostController());
+        this.controllersByURL.put("/video", new VideoController());
     }
 
     public IController resolveControllerForRequest(final HttpServletRequest request) {

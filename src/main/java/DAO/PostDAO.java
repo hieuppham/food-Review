@@ -46,7 +46,8 @@ public class PostDAO extends AbsDAO {
                 Post post = new Post();
                 post.set_id(rs.getInt("_id"));
                 post.setTitle(rs.getString("title"));
-                post.setContent(rs.getString("content"));
+                post.setHeader(MyFormat.toListString(rs.getString("header")));
+                post.setContent(MyFormat.toListString(rs.getString("content")));
                 post.setDate(rs.getDate("date"));
                 post.setHashtags(MyFormat.toListString(rs.getString("hashtags")));
                 post.setImages(MyFormat.toListString(rs.getString("images")));
@@ -92,7 +93,8 @@ public class PostDAO extends AbsDAO {
             if (rs.next()) {
                 post.set_id(rs.getInt("_id"));
                 post.setTitle(rs.getString("title"));
-                post.setContent(rs.getString("content"));
+                post.setHeader(MyFormat.toListString(rs.getString("header")));
+                post.setContent(MyFormat.toListString(rs.getString("content")));
                 post.setDate(rs.getDate("date"));
                 post.setHashtags(MyFormat.toListString(rs.getString("hashtags")));
                 post.setImages(MyFormat.toListString(rs.getString("images")));
@@ -106,18 +108,19 @@ public class PostDAO extends AbsDAO {
     }
 
     public static class addPost {
-        public addPost(String title, String content, String images, String hashtags, String name, String contact) {
+        public addPost(String title, String header, String content, String images, String hashtags, String name, String contact) {
             try {
                 Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement("insert into Post(title, date, content, images, hashtags, name, contact) " +
-                        "values (?, ?, ?, ?, ?, ?,?)");
+                PreparedStatement ps = con.prepareStatement("insert into Post(title, date, header, content, images, hashtags, name, contact) " +
+                        "values (?, ?, ?, ?, ?, ?,?,?)");
                 ps.setString(1, title);
                 ps.setString(2, MyFormat.formatDate(new Date()));
-                ps.setString(3, content);
-                ps.setString(4, images);
-                ps.setString(5, hashtags);
-                ps.setString(6, name);
-                ps.setString(7, contact);
+                ps.setString(3, header);
+                ps.setString(4, content);
+                ps.setString(5, images);
+                ps.setString(6, hashtags);
+                ps.setString(7, name);
+                ps.setString(8, contact);
                 ps.execute();
             }catch (Exception e){
                 e.printStackTrace();
