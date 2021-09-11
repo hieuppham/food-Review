@@ -30,6 +30,7 @@
     });
 
     map.on('load', () => {
+        console.log(window.location.hostname + '/api/foodreview/map');
         map.addSource('places', {
             'type': 'geojson',
             'data': window.location.hostname + '/api/foodreview/map',
