@@ -2,9 +2,6 @@ package model;
 
 import lombok.Data;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.*;
 
 @Data
@@ -18,6 +15,8 @@ public class Post {
     private List<String> hashtags;
     private String name;
     private String contact;
+    private Feature features;
+
     public Map getParas(){
         Map<String, String> map = new HashMap();
         for (int i = 0; i < header.size(); i++) {

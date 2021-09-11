@@ -38,6 +38,6 @@ public class HomeController extends MyController {
         list = new PostService().searchPosts(text, page);
         ctx.setVariable("list", list);
 
-        templateEngine.process("index", ctx, response.getWriter());
+        templateEngine.process("home", ctx, response.getWriter());
     }
 }

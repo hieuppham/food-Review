@@ -17,6 +17,9 @@ public class AddPostController implements IController{
             String title = request.getParameter("title").trim();
             String name = request.getParameter("name").trim();
             String contact = request.getParameter("contact").trim();
+            String des = request.getParameter("des").trim();
+            double lng = Double.parseDouble(request.getParameter("lng"));
+            double lat = Double.parseDouble(request.getParameter("lat"));
             String[] urls = request.getParameterValues("images");
             String[] arrHeaders = request.getParameterValues("headers");
             String[] arrContents =request.getParameterValues("contents");
@@ -26,7 +29,7 @@ public class AddPostController implements IController{
             String headers = MyFormat.arrToString(arrHeaders);
             String contents = MyFormat.arrToString(arrContents);
             String hashtags = MyFormat.arrToString(arrHashtags);
-            new PostService().addPost(title, headers, contents, images, hashtags, name, contact);
+            new PostService().addPost(title, headers, contents, images, hashtags, name, contact, des, lng, lat);
             response.sendRedirect("/");
         }
     }

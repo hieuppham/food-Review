@@ -1,7 +1,10 @@
 package DAO;
 
 
+import model.Feature;
+import model.Geo;
 import model.Post;
+import model.Properties;
 import util.MyFormat;
 
 
@@ -63,7 +66,7 @@ public class PostDAO extends AbsDAO {
     }
 
     public int getNumberOfPosts(String text) {
-        int numberOfPost = 0;
+        int numberOfPost = 1;
         try {
             Connection con = getConnection();
             PreparedStatement ps;
@@ -108,11 +111,11 @@ public class PostDAO extends AbsDAO {
     }
 
     public static class addPost {
-        public addPost(String title, String header, String content, String images, String hashtags, String name, String contact) {
+        public addPost(String title, String header, String content, String images, String hashtags, String name, String contact, String description, double lng, double lat) {
             try {
                 Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement("insert into Post(title, date, header, content, images, hashtags, name, contact) " +
-                        "values (?, ?, ?, ?, ?, ?,?,?)");
+                PreparedStatement ps = con.prepareStatement("insert into Post(title, date, header, content, images, hashtags, name, contact, description, lng, lat) " +
+                        "values (?, ?, ?, ?, ?, ?,?,?, ?, ?, ?)");
                 ps.setString(1, title);
                 ps.setString(2, MyFormat.formatDate(new Date()));
                 ps.setString(3, header);
@@ -121,10 +124,35 @@ public class PostDAO extends AbsDAO {
                 ps.setString(6, hashtags);
                 ps.setString(7, name);
                 ps.setString(8, contact);
+                ps.setString(9, description);
+                ps.setDouble(10, lng);
+                ps.setDouble(11, lat);
                 ps.execute();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    public List<Feature> getAllFeatures() {
+        List<Feature> list = new ArrayList<>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select description, lng, lat from post");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Feature feature = new Feature();
+                feature.setProperties(new Properties(rs.getString("description")));
+                feature
+                        .setGeometry(new Geo(new double[]{rs.getDouble("lng"), rs.getDouble("lat")}));
+
+                list.add(feature);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

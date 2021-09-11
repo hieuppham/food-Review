@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/frontend :: head}">
+
+</head>
+<body>
+<nav th:replace="~{fragment/frontend :: navigation}"></nav>
+<header class="masthead" style="background-image: url('/image/img/api-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Share our food</h1>
+                    <!--                    <span class="subheading">A Blog Theme by Start Bootstrap</span>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container px-4 px-lg-5">
+        <b>Post</b>
+        <i>GET: /api/foodreview/post?(text=&page=)</i>
+        <pre>
+            Get post(s) by text and page
+            QueryParam: -text <i>optional</i> default <b>null</b>
+                        -page <i>optional</i> default <b>1</b>
+            Example: /api/foodreview/post?(text=banana&page=2)
+        </pre>
+
+        <b>GET: /api/foodreview/post/{id}</b>
+        <pre>
+            Get post by id
+            QueryParam: -id <i>required</i>
+            Example: /api/foodreview/post/157
+        </pre>
+
+        <b>Comment</b>
+        <i>GET: /api/foodreview/comment/{post_id}</i>
+        <pre>
+            Get all comments by post id
+            QueryParam: -post_id <i>required</i>
+            Example: /api/foodreview/comment/157
+        </pre>
+
+        <b>POST: /api/foodreview/comment/{post_id}</b>
+        <pre>
+            Insert one comment to post has specified id
+            QueryParam: -post_id <i>required</i>
+            RequestBody:
+                {
+                    "content": "Very delicious!",
+                    "name": "Leo",
+                    "contact": "leo@abc.com"
+                }
+            Example: /api/foodreview/comment/157
+        </pre>
+    </div>
+</main>
+
+<footer th:replace="~{fragment/frontend :: footer}"></footer>
+<div th:replace="~{fragment/frontend :: script}"></div>
+</body>
+</html>

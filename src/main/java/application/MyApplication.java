@@ -32,6 +32,8 @@ public class MyApplication {
         this.controllersByURL.put("/write", new WriteController());
         this.controllersByURL.put("/addPost", new AddPostController());
         this.controllersByURL.put("/video", new VideoController());
+        this.controllersByURL.put("/dev", new ApiController());
+        this.controllersByURL.put("/map", new MapController());
     }
 
     public IController resolveControllerForRequest(final HttpServletRequest request) {
