@@ -7,10 +7,11 @@ import org.json.simple.JSONObject;
 import service.CommentService;
 import service.PostService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.awt.*;
-import java.util.List;
+
 
 @Path("/foodreview")
 public class FoodReviewAPI {
@@ -54,8 +55,11 @@ public class FoodReviewAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/map")
-    public GeoJSON getMap(){
-
+    public GeoJSON getMap(@Context HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "CSRF-Token, X-Requested-By, Authorization, Content-Type");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return new GeoJSON("FeatureCollection", new PostService().getAllFeatures());
     }
 }

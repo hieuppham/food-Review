@@ -19,12 +19,19 @@ public class PostController extends MyController{
         if(request.getParameter("id") != null){
             id = Integer.parseInt(request.getParameter("id").trim());
             Post post = new PostService().getPost(id);
+            if(post == null) {
+                templateEngine.process("error", ctx, response.getWriter());
+                return;
+            }
             ctx.setVariable("post", post);
 
             List<Comment> listComment = new CommentService().getComments(id);
+
             ctx.setVariable("listComment", listComment);
         }else{
             System.out.println("id is null");
+            templateEngine.process("error", ctx, response.getWriter());
+            return;
         }
 
         templateEngine.process("post", ctx, response.getWriter());

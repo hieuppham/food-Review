@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragment/frontend :: head}">
+<head th:replace="~{fragment/frontend :: head(title=${post.title})}">
 </head>
 <body>
 <link rel="stylesheet" href="/css/imgpopup.css">
@@ -14,8 +14,8 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="post-heading">
                         <h1 th:text="*{title}">Man must explore, and this is exploration at its greatest</h1>
-                        <h2 class="subheading"><span th:each="text : *{hashtags}" th:text="'#'+ ${text} + ' '"></span>
-                        </h2>
+                        <h3 class="subheading"><span th:each="text : *{hashtags}" th:text="'#'+ ${text} + ' '"></span>
+                        </h3>
                         <span class="meta">
                                 Posted by
                                 <a th:text="*{name}" href="#!">Start Bootstrap</a>
@@ -78,9 +78,11 @@
                                 <img class="rounded-circle shadow-1-strong me-3"
                                      src="/image/img/user.svg" alt="avatar"
                                      width="40" height="40"/>
+                                <small class="user-name"></small>
+                                <small class="user-contact"></small>
                                 <input type="hidden" name="post_id" th:value="${post._id}" >
-                                <input class="user-name" type="text" name="name" placeholder="Name" required>
-                                <input class="user-contact"  type="text" name='contact' placeholder="Contact" >
+                                <input class="user-name" type="hidden" name="name">
+                                <input class="user-contact"  type="hidden" name='contact' >
                                 <div class="form-outline w-100">
                                     <textarea name="content" class="comment form-control"
                                               id="textAreaExample"

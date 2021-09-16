@@ -40,17 +40,14 @@ function handleSignedInUser(user) {
     $(".user").removeClass("d-none");
 
     $(".user-name").text(user.displayName ? user.displayName : "Anonymous");
-    $("p.user-contact").text(user.email ? user.email : user.phoneNumber);
+    $(".user-contact").text(user.email ? user.email : user.phoneNumber);
     $("img.user-avatar").attr("src", user.photoURL ? user.photoURL : "/image/img/user.svg");
 
 
-    $("input.user-name").val(user.displayName);
-    if (user.displayName) {
-        $("input.user-name").attr("readonly", " readonly");
-    }
+    $("input.user-name").val(user.displayName ? user.displayName : 'Anonymous');
 
     $("input.user-contact").val(user.email ? user.email : user.phoneNumber);
-    $("input.user-contact").attr("readonly", "readonly");
+
 
     $(".comment").removeAttr("disabled");
     $("textarea.comment").attr("placeholder", "Type your comment.");

@@ -72,8 +72,8 @@ function addParagraph() {
     let textarea = document.createElement("textarea");
     textarea.setAttribute("class", "post-content");
     textarea.setAttribute("name", "contents");
-    textarea.setAttribute("cols", "30");
-    textarea.setAttribute("rows", "10");
+    textarea.setAttribute("cols", "40");
+    textarea.setAttribute("rows", "7");
     textarea.setAttribute("placeholder", "Write your review");
     textarea.setAttribute("required", "required");
     li.append(textarea);

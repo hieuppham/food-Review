@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Home</title>
+    <title th:text="${title}"></title>
     <link rel="icon" type="image/x-icon" href="image/favicon.svg"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -98,6 +98,7 @@
                         </a>
                     </li>
                 </ul>
+
                 <div class="small text-center text-muted fst-italic">Copyright &copy; <span
                         th:text="#{app_name}"></span> 2021
                 </div>

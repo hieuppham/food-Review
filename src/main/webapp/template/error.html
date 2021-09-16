@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/frontend :: head(title='Error')}">
+</head>
+<body>
+<nav th:replace="~{fragment/frontend :: navigation}"></nav>
+<header class="masthead" style="background-image: url('/image/img/error-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <p>Oops! Page not found</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<footer th:replace="~{fragment/frontend :: footer}"></footer>
+<div th:replace="~{fragment/frontend :: script}"></div>
+</body>
+</html>

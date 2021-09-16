@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragment/frontend :: head}">
+<head th:replace="~{fragment/frontend :: head(title='Write')}">
 </head>
 <body>
+<link href="/css/custom.css" rel="stylesheet" type="text/css">
 <nav th:replace="~{fragment/frontend :: navigation}"></nav>
 
 <header class="masthead" style="background-image: url('/image/img/write-bg.jpg')">
@@ -17,25 +18,26 @@
         </div>
     </div>
 </header>
-<div class="container">
+<div class="container main">
     <form action="/addPost" method="post" onkeyup="blankCheck()">
         <input type="text" class="user-name" name="name" placeholder="Name" required>
         <br>
         <input type="text" class="user-contact" name="contact" placeholder="Contact" >
         <br>
+        <label for="images"><b>Image links:</b></label>
         <ul id="images" class="list-group list-group-flush">
             <li class="list-group-item"><input type="text" name="images" placeholder="link" required></li>
         </ul>
-        <br>
         <button class="btn btn-primary" type="button" onclick="addImage()">Add Image</button>
         <button class="btn btn-primary" type="button" onclick="removeImage()">Remove Image</button>
         <br>
-        <input type="text" name="title" placeholder="Title" required>
+        <label for="title"><b>Post content:</b></label>
+        <br>
+        <input id="title" type="text" name="title" placeholder="Title" required>
         <br>
         <ul id="hashtags" class="list-group list-group-flush">
             <li class="list-group-item"><input type="text" name="hashtags" placeholder="Hashtag" required></li>
         </ul>
-        <br>
         <button class="btn btn-primary" type="button" onclick="addHashtag()">Add Hashtag</button>
         <button class="btn btn-primary" type="button" onclick="removeHashtag()">Remove Hashtag</button>
         <br>
@@ -43,15 +45,16 @@
             <li class="list-group-item">
                 <input type="text" name="headers" placeholder="Header" required>
                 <br>
-                <textarea class="post-content" name="contents" cols="30" rows="10" placeholder="Write your review"
+                <textarea class="post-content" name="contents" cols="40" rows="7" placeholder="Write your review"
                         required  ></textarea>
             </li>
         </ul>
-        <br>
         <button class="btn btn-primary" type="button" onclick="addParagraph()">Add Paragraph</button>
         <button class="btn btn-primary" type="button" onclick="removeParagraph()">Remove Paragraph</button>
         <br>
-        <textarea name="des" class="post-content" cols="30" rows="5" placeholder="Description about location" required></textarea>
+        <label for="des"><b>Location:</b></label>
+        <br>
+        <textarea id="des" name="des" class="post-content" cols="40" rows="5" placeholder="Description about location" required></textarea>
         <br>
         <input type="text"  name="lng" placeholder="lng" required/>
         <input type="text" name="lat" placeholder="lat" required/>

@@ -1,5 +1,6 @@
 package application;
 
+
 import controller.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -7,13 +8,13 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class MyApplication {
     public TemplateEngine templateEngine;
     private Map<String, IController> controllersByURL;
-
     public MyApplication(final ServletContext servletContext) {
         super();
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
@@ -38,7 +39,10 @@ public class MyApplication {
 
     public IController resolveControllerForRequest(final HttpServletRequest request) {
         final String path = getRequestPath(request);
-        return this.controllersByURL.get(path);
+        if(this.controllersByURL.get(path) != null){
+            return this.controllersByURL.get(path);
+        }
+        return new PageNotFoundController();
     }
 
     public static String getRequestPath(final HttpServletRequest request) {

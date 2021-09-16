@@ -24,23 +24,23 @@ public class PostDAO extends AbsDAO {
 
             if (text != null) {
                 if (page != 1) {
-                    ps = con.prepareStatement("select *  from Post where match (title, content, hashtags) against (? IN NATURAL LANGUAGE MODE) LIMIT ? OFFSET ?");
+                    ps = con.prepareStatement("select *  from Post where match (title, content, hashtags) against (? IN NATURAL LANGUAGE MODE) order by date DESC LIMIT ? OFFSET ? ");
                     ps.setString(1, "'" + text + "'");
                     ps.setInt(2, NUMBER_OF_POST_IN_PAGE);
                     ps.setInt(3, (page - 1) * NUMBER_OF_POST_IN_PAGE);
                 } else {
-                    ps = con.prepareStatement("select *  from Post where match (title, content, hashtags) against (? IN NATURAL LANGUAGE MODE) LIMIT ?");
+                    ps = con.prepareStatement("select *  from Post where match (title, content, hashtags) against (? IN NATURAL LANGUAGE MODE) order by date DESC LIMIT ? ");
                     ps.setString(1, "'" + text + "'");
                     ps.setInt(2, NUMBER_OF_POST_IN_PAGE);
                 }
 
             } else {
                 if (page != 1) {
-                    ps = con.prepareStatement("select *  from Post LIMIT ? OFFSET ?");
+                    ps = con.prepareStatement("select *  from Post order by date DESC LIMIT ? OFFSET ? ");
                     ps.setInt(1, NUMBER_OF_POST_IN_PAGE);
                     ps.setInt(2, (page - 1) * NUMBER_OF_POST_IN_PAGE);
                 } else {
-                    ps = con.prepareStatement("select *  from Post LIMIT ? ");
+                    ps = con.prepareStatement("select *  from Post order by date DESC LIMIT ? ");
                     ps.setInt(1, NUMBER_OF_POST_IN_PAGE);
                 }
             }

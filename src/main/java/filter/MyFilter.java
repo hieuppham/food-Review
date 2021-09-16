@@ -31,7 +31,7 @@ public class MyFilter implements Filter {
 
 
     private boolean process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (request.getRequestURI().startsWith("/css") || request.getRequestURI().startsWith("/image") || request.getRequestURI().startsWith("/template") || request.getRequestURI().startsWith("/js") || request.getRequestURI().startsWith("/api"))
+        if (request.getRequestURI().startsWith("/css") || request.getRequestURI().startsWith("/image") || request.getRequestURI().startsWith("/template") || request.getRequestURI().startsWith("/js") || request.getRequestURI().startsWith("/api")  )
             return false;
 
         IController controller = this.application.resolveControllerForRequest(request);
@@ -47,6 +47,5 @@ public class MyFilter implements Filter {
             controller.process(request, response, this.servletContext, templateEngine);
         }
         return true;
-
     }
 }
