@@ -32,7 +32,7 @@ public class AddPostController implements IController {
 
             PrintStream out = new PrintStream(System.out, true, "UTF-8");
             out.println(title + name + des + headers + contents );
-            new PostService().addPost(title, headers, contents, images, hashtags, name, contact, des, lng, lat);
+
             response.sendRedirect("/");
         }
     }

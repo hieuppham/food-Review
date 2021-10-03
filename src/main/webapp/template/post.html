@@ -6,20 +6,18 @@
 <link rel="stylesheet" href="/css/imgpopup.css">
 <nav th:replace="~{fragment/frontend :: navigation}"></nav>
 <div th:object="${post}">
-    <!-- Page Header-->
+<!--     Page Header-->
     <header class="masthead"
-            th:style="'background-image' +':' +  'url(' + 'https://drive.google.com/uc?export=view&id='+ *{images[0]}+')'">
+            th:style="'background-image:url(' + *{images.get(0)} +')'">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="post-heading">
                         <h1 th:text="*{title}">Man must explore, and this is exploration at its greatest</h1>
-                        <h3 class="subheading"><span th:each="text : *{hashtags}" th:text="'#'+ ${text} + ' '"></span>
+                        <h3 class="subheading"><span th:each="text : *{tags}" th:text="'#'+ ${text} + ' '"></span>
                         </h3>
-                        <span class="meta">
-                                Posted by
-                                <a th:text="*{name}" href="#!">Start Bootstrap</a>
-                                on <span th:text="*{date}">August 24, 2021</span>
+                        <span th:if="*{date}" class="meta" >
+                                Posted on <span th:text="*{date}">August 24, 2021</span>
                             </span>
                     </div>
                 </div>
@@ -27,7 +25,7 @@
         </div>
     </header>
 
-    <!-- Post Content-->
+<!--     Post Content-->
     <article class="mb-4">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -40,7 +38,7 @@
                                     <ul>
                                         <li th:each="img : *{images}">
                                             <a class="ns-img"
-                                               th:href="@{https://drive.google.com/uc(export='view', id=${img})}"></a>
+                                               th:href="@{${img}}"></a>
                                         </li>
                                     </ul>
                                     <div id="fsBtn" class="fs-icon" title="Expand/Close"></div>
@@ -50,16 +48,15 @@
                         <div style="max-width:700px;margin:30px auto;">
                             <div class="gallery">
                                 <img th:each="img : *{images}"
-                                     th:src="@{https://drive.google.com/uc(export='view', id=${img})}"
+                                     th:src="@{${img}}"
                                      th:onclick="lightbox(0)" style="width:auto; height:140px;"/>
                             </div>
                         </div>
                     </div>
                     <!--                    text-->
-                    <div th:each="map : *{getParas().entrySet()}">
-                        <h3 th:text="${map.getKey()}"></h3>
-                        <p th:text="${map.getValue()}"></p>
-                    </div>
+
+                        <p th:each="text : *{texts}" th:text="${text}"></p>
+
 
                 </div>
             </div>
@@ -80,9 +77,9 @@
                                      width="40" height="40"/>
                                 <small class="user-name"></small>
                                 <small class="user-contact"></small>
-                                <input type="hidden" name="post_id" th:value="${post._id}" >
+                                <input type="hidden" name="post_score" th:value="${post.score}" >
                                 <input class="user-name" type="hidden" name="name">
-                                <input class="user-contact"  type="hidden" name='contact' >
+<!--                                <input class="user-contact"  type="hidden" name='contact' >-->
                                 <div class="form-outline w-100">
                                     <textarea name="content" class="comment form-control"
                                               id="textAreaExample"

@@ -12,8 +12,8 @@ import java.util.Date;
 
 @Data
 public class Comment {
-    private int _id;
-    private int post_id;
+    private int score;
+    private int post_score;
     private String name;
     private String contact;
     private String content;

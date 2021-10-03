@@ -12,10 +12,11 @@
                 <div class="site-heading">
                     <h1>talk <span style="font-size: 20px">about</span> Dishes</h1>
                     <!--                    <span class="subheading">A Blog Theme by Start Bootstrap</span>-->
-                    <form action="/" method="get" onkeyup="blankCheck()">
-                        <input type="text" name="text" placeholder="what you want to eat?" required>
-                        <button type="submit">Search</button>
-                    </form>
+<!--                    no more search-->
+<!--                    <form action="/" method="get" onkeyup="blankCheck()">-->
+<!--                        <input type="text" name="text" placeholder="what you want to eat?" required>-->
+<!--                        <button type="submit">Search</button>-->
+<!--                    </form>-->
                 </div>
             </div>
         </div>
@@ -28,17 +29,17 @@
             <div th:each="post : ${list}" class="col-md-10 col-lg-8 col-xl-7">
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a th:href="@{/post(id = ${post._id})}">
+                    <a th:href="@{/post(score = ${post.score})}">
                         <h2 th:text="${post.title}" class="post-title">Man must explore, and this is exploration at its
                             greatest</h2>
-                        <h3 class="post-subtitle"><span th:each="text : ${post.hashtags}"
+                        <h3 class="post-subtitle"><span th:each="text : ${post.tags}"
                                                         th:text="'#'+ ${text} + ' '"></span></h3>
                     </a>
-                    <p class="post-meta">
-                        Posted by
-                        <span th:text="${post.name}" href="#">Start Bootstrap</span>
-                        <span th:text="'on ' + ${post.getDate()}">on September 24, 2021</span>
-                    </p>
+<!--                    <p class="post-meta">-->
+<!--                        Posted by-->
+<!--                        <span th:text="${post.name}" href="#">Start Bootstrap</span>-->
+<!--                        <span th:text="'on ' + ${post.getDate()}">on September 24, 2021</span>-->
+<!--                    </p>-->
                 </div>
                 <!-- Divider-->
                 <hr class="my-4"/>

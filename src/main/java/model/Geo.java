@@ -8,5 +8,4 @@ import lombok.Data;
 public class Geo {
     private final String type = "Point";
     private double[] coordinates;
-
 }

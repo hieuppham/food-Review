@@ -40,7 +40,7 @@ function handleSignedInUser(user) {
     $(".user").removeClass("d-none");
 
     $(".user-name").text(user.displayName ? user.displayName : "Anonymous");
-    $(".user-contact").text(user.email ? user.email : user.phoneNumber);
+    // $(".user-contact").text(user.email ? user.email : user.phoneNumber);
     $("img.user-avatar").attr("src", user.photoURL ? user.photoURL : "/image/img/user.svg");
 
 

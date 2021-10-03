@@ -1,7 +1,6 @@
 package controller;
 
 import org.thymeleaf.ITemplateEngine;
-import service.CommentService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

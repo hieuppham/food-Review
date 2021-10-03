@@ -15,13 +15,7 @@ public class HomeController extends MyController {
     public void process(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, ITemplateEngine templateEngine) throws Exception {
         super.process(request, response, servletContext, templateEngine);
 
-        String text = null;
         String url = "/?";
-        //url use for pagination
-        if (request.getParameter("text") != null) {
-            text = request.getParameter("text").trim();
-            url = url + "&text=" + text;
-        }
         ctx.setVariable("url", url);
         //page use for pagination
         int page = 1;
@@ -31,11 +25,11 @@ public class HomeController extends MyController {
         ctx.setVariable("page", page);
         //totalPages use for pagination
         int totalPages = 0;
-        totalPages = new PostService().getTotalPages(text);
+        totalPages = new PostService().getTotalPages();
         ctx.setVariable("totalPages", totalPages);
         //list of post
         List<Post> list = new ArrayList<>();
-        list = new PostService().searchPosts(text, page);
+        list = new PostService().getPosts(page);
         ctx.setVariable("list", list);
 
         templateEngine.process("home", ctx, response.getWriter());
