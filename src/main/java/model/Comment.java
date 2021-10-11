@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class Comment {
     private int score;
-    private int post_score;
+   //post-score == score
     private String name;
     private String contact;
     private String content;

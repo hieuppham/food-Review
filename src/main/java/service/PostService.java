@@ -7,7 +7,7 @@ import model.Post;
 import java.util.List;
 
 public class PostService {
-    private final int NUMBER_OF_POST_IN_PAGE = 8;
+    private final int NUMBER_OF_POST_IN_PAGE = 12;
 
     public List<Post> getPosts(int page) {
         return new PostDAO().getPosts(page);

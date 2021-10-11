@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Map</title>
@@ -47,22 +47,34 @@
         max-width: 400px;
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
+
+    .mapboxgl-ctrl-top-right{
+        top: 8%;
+    }
+    .mapboxgl-ctrl-geocoder {
+        right: 10%;
+    }
 </style>
 
-<!--<nav th:replace="~{fragment/frontend :: navigation}"></nav>-->
+<nav th:replace="~{fragment/frontend :: navigation}"></nav>
 <div id="map"></div>
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoicGhhbXRydW5naGlldTZkIiwiYSI6ImNrdGJuZHduNzF4aTYyd3Bsa3RyMGxhY3IifQ.jzhAQ1H3SkdOoJi-BYKI8A';
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [105.835060, 21.036695],
-        zoom: 11.15
+        center: [105.82061007444896, 21.01794812087948],
+        zoom: 12,
     });
 
-    const marker = new mapboxgl.Marker()
-        .setLngLat([-77.038659, 38.931567])
-        .addTo(map);
+    const urlParams = Array.from(new URLSearchParams(location.search).values());
+    if(urlParams.length != 0) {
+        const lng = parseFloat(urlParams[0]);
+        const lat = parseFloat(urlParams[1]);
+        const marker = new mapboxgl.Marker()
+            .setLngLat([lng, lat])
+            .addTo(map);
+    }
 
     map.on('load', () => {
         // Add the control to the map.
@@ -75,7 +87,7 @@
 
         map.addSource('places', {
             'type': 'geojson',
-            'data': `${window.location.protocol}//${window.location.hostname}/api/foodreview/map`,
+            'data': 'http://localhost:8081/api/foodreview/map'//`${window.location.protocol}//${window.location.hostname}/api/foodreview/map`,
         });
         // Add a layer showing the places.
         map.addLayer({
@@ -104,15 +116,11 @@
             const coordinates = e.features[0].geometry.coordinates.slice();
             const description = e.features[0].properties.description;
 
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
+
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
 
-            // Populate the popup and set its coordinates
-            // based on the feature found.
             popup.setLngLat(coordinates).setHTML(description).addTo(map);
         });
 

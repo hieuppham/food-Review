@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 public class PostDAO extends AbsDAO {
-    private final int NUMBER_OF_POST_IN_PAGE = 8;
+    private final int NUMBER_OF_POST_IN_PAGE = 12;
 
     public List<Post> getPosts(int page) {
         List<Post> list = new ArrayList<>();

@@ -40,20 +40,16 @@ function handleSignedInUser(user) {
     $(".user").removeClass("d-none");
 
     $(".user-name").text(user.displayName ? user.displayName : "Anonymous");
-    // $(".user-contact").text(user.email ? user.email : user.phoneNumber);
     $("img.user-avatar").attr("src", user.photoURL ? user.photoURL : "/image/img/user.svg");
 
-
     $("input.user-name").val(user.displayName ? user.displayName : 'Anonymous');
-
     $("input.user-contact").val(user.email ? user.email : user.phoneNumber);
 
-
     $(".comment").removeAttr("disabled");
-    $("textarea.comment").attr("placeholder", "Type your comment.");
+    $(".comment").attr("placeholder", "Type your comment.");
 
-    $("button.add-post").removeAttr("disabled");
-    $("textarea.post-content").attr("placeholder", "Write your review.");
+    // $("button.add-post").removeAttr("disabled");
+    // $("textarea.post-content").attr("placeholder", "Write your review.");
 }
 
 function handleSignedOutUser() {
@@ -61,7 +57,7 @@ function handleSignedOutUser() {
     $(".user").addClass("d-none");
     $(".guest").removeClass("d-none");
     $(".comment").attr("disabled", "disabled");
-    $("textarea.comment").attr("placeholder", "You have to login to post comment.");
-    $("button.add-post").attr("disabled", "disabled");
-    $("textarea.post-content").attr("placeholder", "You have to login to post your review.");
+    $(".comment").attr("placeholder", "You have to login to post comment.");
+    // $("button.add-post").attr("disabled", "disabled");
+    // $("textarea.post-content").attr("placeholder", "You have to login to post your review.");
 }

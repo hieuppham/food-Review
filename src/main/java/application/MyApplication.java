@@ -29,8 +29,8 @@ public class MyApplication {
         this.controllersByURL = new HashMap<>();
         this.controllersByURL.put("/", new HomeController());
         this.controllersByURL.put("/post", new PostController());
-//        this.controllersByURL.put("/comment", new CommentController());
-        this.controllersByURL.put("/write", new WriteController());
+       this.controllersByURL.put("/comment", new CommentController());
+        //this.controllersByURL.put("/write", new WriteController());
         this.controllersByURL.put("/addPost", new AddPostController());
         this.controllersByURL.put("/video", new VideoController());
         this.controllersByURL.put("/dev", new ApiController());
