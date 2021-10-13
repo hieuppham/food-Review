@@ -57,7 +57,7 @@
 
                         <p th:each="text : *{texts}" th:text="${text}"></p>
 
-                    <a th:href="@{http://localhost:8081/map(lng=*{coordinates[0]}, lat=*{coordinates[1]})}" type="button" class="btn btn-primary btn-sm">Go to map</a>
+                    <a th:href="@{https://food-review2021.herokuapp.com/map(lng=*{coordinates[0]}, lat=*{coordinates[1]})}" type="button" class="btn btn-primary btn-sm">Go to map</a>
                 </div>
             </div>
         </div>
@@ -70,18 +70,18 @@
             <div class="col-md-12 col-lg-10 col-xl-8">
                 <div class="card">
                     <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-                        <form action="/comment" method="POST" onkeyup="blankCheck()">
+                        <form id="commentForm" action="/comment" method="POST" onkeyup="blankCheck()">
                             <div class="d-flex flex-start w-100">
                                 <img class="rounded-circle shadow-1-strong me-3"
                                      src="/image/img/user.svg" alt="avatar"
                                      width="40" height="40"/>
                                 <small class="user-name"></small>
-                                <input type="hidden" name="score" th:value="${post.score}">
-                                <input class="user-name" type="hidden" name="name">
-                                <input class="user-contact"  type="hidden" name="contact">
+                                <input id="score" type="hidden" name="score" th:value="${post.score}">
+                                <input id="user-name" class="user-name" type="hidden" name="name">
+                                <input id="contact" class="user-contact"  type="hidden" name="contact">
                                 <div class="form-outline w-100">
                                     <textarea name="content" class="comment form-control"
-                                              id="textAreaExample"d
+                                              id="textAreaExample"
                                               rows="4" style="background: #fff;"
                                               required></textarea>
                                 </div>
@@ -91,7 +91,8 @@
                             </div>
                         </form>
                     </div>
-                    <div th:each="comment : ${commentList}">
+                    <ul id="commentList">
+                    <li th:each="comment : ${commentList}">
                         <div class="card-body">
                             <div class="d-flex flex-start align-items-center">
                                 <img class="rounded-circle shadow-1-strong me-3"
@@ -111,7 +112,8 @@
                                 exercitation ullamco laboris nisi ut aliquip consequat.
                             </p>
                         </div>
-                    </div>
+                    </li>
+                    </ul>
                 </div>
             </div>
         </div>
