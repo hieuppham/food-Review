@@ -38,7 +38,7 @@ function handleSignedInUser(user) {
     $(".guest").addClass("d-none");
     $(".user").removeClass("d-none");
 
-    if(user.email === "phamtrunghieu6d@gmail.com"){
+    if(user.email == "phamtrunghieu6d@gmail.com"){
         $("li#manager-form").attr("display", "block");
         $("input.uid").val(user.id);
         $("li#manager-form > form > button").removeAttr("disabled");
