@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/frontend :: head(title='Manage')}">
+</head>
+<body>
+<link href="/css/manage.css" rel="stylesheet" type="text/css">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+<nav th:replace="~{fragment/frontend :: navigation}"></nav>
+
+<div class="main-container">
+    <form action="/manage" method="get" class="find-form">
+        <input class="uid" type="hidden" name="uid"/>
+        <input type="text" name="score" placeholder="Type post score">
+        <button class="btn btn-primary" type="submit">Find</button>
+    </form>
+
+    <form action="/manage" method="post" class="info-form" th:if="${post}" th:object="${post}" onkeyup="blankCheck()">
+        <input class="uid" type="hidden" name="uid"/>
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="key" th:value="*{key}">
+        <div>
+            <div class="info">
+                <label for="score">Score</label>
+                <input id="score" th:value="*{score}" name="score" type="text">
+                <br>
+                <label for="date">Date:</label>
+                <input id="date" type="date" name="date" th:value="*{date} ? *{dateToString()} : null">
+                <br>
+                <label for="images"><b>Image links:</b></label>
+                <ul id="images" class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="image :*{images}"><input th:value="${image}" type="text"
+                                                                                  name="images"
+                                                                                  placeholder="link" required></li>
+                </ul>
+                <button class="btn btn-primary" type="button" onclick="addImage()">Add Image</button>
+                <button class="btn btn-primary" type="button" onclick="removeImage()">Remove Image</button>
+                <br>
+                <label for="title"><b>Post content:</b></label>
+                <br>
+                <input id="title" type="text" name="title" placeholder="Title" th:value="*{title}" required>
+                <br>
+                <label for="hashtags"><b>Tags:</b></label>
+                <ul id="hashtags" class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="tag : *{tags}"><input type="text" th:value="${tag}" name="tags"
+                                                                               placeholder="Hashtag" required></li>
+                </ul>
+                <button class="btn btn-primary" type="button" onclick="addHashtag()">Add Hashtag</button>
+                <button class="btn btn-primary" type="button" onclick="removeHashtag()">Remove Hashtag</button>
+                <br>
+                <ul id="paragraphs" class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="text :*{texts}">
+                        <input th:value="${text}" class="post-content" name="texts" placeholder="Write your review"
+                               required/>
+                    </li>
+                </ul>
+                <button class="btn btn-primary" type="button" onclick="addParagraph()">Add Paragraph</button>
+                <button class="btn btn-primary" type="button" onclick="removeParagraph()">Remove Paragraph</button>
+                <br>
+                <b>Coordinates:</b>
+                <br>
+                <input th:value="*{coordinates[0]}" type="text" id="lng" name="lng" placeholder="lng" required/>
+                <input th:value="*{coordinates[1]}" type="text" id="lat" name="lat" placeholder="lat" required/>
+            </div>
+            <div id="map"></div>
+        </div>
+        <button type="submit" class="add-post btn btn-primary">Edit/Add</button>
+    </form>
+    <form action="/manage" method="post" th:if="${post}">
+        <input class="uid" type="hidden" name="uid"/>
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="score" th:value="${post.score}">
+        <button type="submit" class="add-post btn btn-primary">Delete</button>
+    </form>
+</div>
+<script src="/js/manage.js"></script>
+<footer th:replace="~{fragment/frontend :: footer}"></footer>
+<div th:replace="~{fragment/frontend :: script}"></div>
+</body>
+</html>

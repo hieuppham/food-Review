@@ -1,0 +1,11 @@
+.btn-primary {
+    padding: 0.4em 1em;
+}
+
+ul.dropdown-menu.show {
+    text-align: center;
+}
+
+ul.dropdown-menu.show > li {
+    padding: 0.4em;
+}

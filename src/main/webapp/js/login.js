@@ -12,7 +12,6 @@ firebase.auth().onAuthStateChanged(function (user) {
     user ? handleSignedInUser(user) : handleSignedOutUser();
 });
 
-
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
 const uiConfig = {
     signInFlow: "popup",
@@ -39,6 +38,12 @@ function handleSignedInUser(user) {
     $(".guest").addClass("d-none");
     $(".user").removeClass("d-none");
 
+    if(user.email === "phamtrunghieu6d@gmail.com"){
+        $("li#manager-form").attr("display", "block");
+        $("input.uid").val(user.id);
+        $("li#manager-form > form > button").removeAttr("disabled");
+    }
+
     $(".user-name").text(user.displayName ? user.displayName : "Anonymous");
     $("img.user-avatar").attr("src", user.photoURL ? user.photoURL : "/image/img/user.svg");
 
@@ -48,16 +53,16 @@ function handleSignedInUser(user) {
     $(".comment").removeAttr("disabled");
     $(".comment").attr("placeholder", "Type your comment.");
 
-    // $("button.add-post").removeAttr("disabled");
-    // $("textarea.post-content").attr("placeholder", "Write your review.");
 }
 
 function handleSignedOutUser() {
     ui.start("#firebaseui-auth-container", uiConfig);
     $(".user").addClass("d-none");
     $(".guest").removeClass("d-none");
+
     $(".comment").attr("disabled", "disabled");
     $(".comment").attr("placeholder", "You have to login to post comment.");
-    // $("button.add-post").attr("disabled", "disabled");
-    // $("textarea.post-content").attr("placeholder", "You have to login to post your review.");
+
+    $("li#manager-form").attr("display", "none");
+    $("li#manager-form > form > button").attr("disabled", "disabled");
 }

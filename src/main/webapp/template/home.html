@@ -3,68 +3,7 @@
 <head th:replace="~{fragment/frontend :: head(title='Home')}">
 </head>
 <body>
-<style>
-    .post-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        max-width: 80%;
-        margin: auto;
-    }
-    .post {
-        transform: translate(0%, 0%);
-        font-size: 0;
-        margin: 10px;
-        width: 300px;
-        height: 300px;
-        flex-shrink: 0;
-    }
-
-    .post img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .post:before {
-        content: "";
-        transition: 0.3s;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0);
-    }
-
-    .post .links {
-        text-align: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        overflow: hidden;
-        opacity: 0;
-        transition: 0.2s;
-    }
-
-    .post a {
-        color: #fff;
-        position: relative;
-        text-decoration: none;
-    }
-
-    .post span {
-        font-size: 16px;
-    }
-
-    .post:hover:before {
-        opacity: 1;
-        background-color: rgba(0, 0, 0, .5);
-    }
-
-    .post:hover .links {
-        opacity: 1;
-    }
-</style>
+<link rel="stylesheet" href="/css/home.css">
 <nav th:replace="~{fragment/frontend :: navigation}"></nav>
 
 <header class="masthead" style="background-image: url('/image/img/home-bg.jpg')">
@@ -84,20 +23,20 @@
         </div>
     </div>
 </header>
-    <div class="post-container">
-            <div th:each="post : ${list}" class="post post-preview">
-                <!-- Post preview-->
-                <img th:src="${post.images.get(0)}" alt="poster"/>
-                <div class="links">
-                <a th:href="@{/post(score = ${post.score})}">
+<div class="post-container">
+    <div th:each="post : ${list}" class="post post-preview">
+        <!-- Post preview-->
+        <img th:src="${post.images.get(0)}" alt="poster"/>
+        <div class="links">
+            <a th:href="@{/post(score = ${post.score})}">
                         <span><h4 th:text="${post.title}" class="post-title">Man must explore, and this is exploration at its
                             greatest</h4></span>
-                    <span><p class="post-subtitle"><span th:each="text : ${post.tags}"
-                                                         th:text="'#'+ ${text} + ' '"></span></p></span>
-                </a>
-                </div>
-            </div>
+                <span><p class="post-subtitle"><span th:each="text : ${post.tags}"
+                                                     th:text="'#'+ ${text} + ' '"></span></p></span>
+            </a>
+        </div>
     </div>
+</div>
 <div class="p2">
     <ul style="display: flex; list-style-type: none; justify-content: center">
         <li style="padding: 10px;" th:if="${page} > 1"><a th:text="First" th:href="@{${url}(page = 1)}">First</a></li>

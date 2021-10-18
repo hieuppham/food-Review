@@ -7,7 +7,34 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <!--firebase-->
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <!--    firebase-ui-->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"/>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+          rel="stylesheet" type="text/css"/>
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/css/styles.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <!--search-->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+          href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+          type="text/css">
+
     <style>
+
         body {
             margin: 0;
             padding: 0;
@@ -19,117 +46,27 @@
             bottom: 0;
             width: 100%;
         }
+
+        .mapboxgl-popup {
+            max-width: 400px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+
+        .mapboxgl-ctrl-top-right {
+            top: 8%;
+        }
+
+        .mapboxgl-ctrl-geocoder {
+            right: 10%;
+        }
+
+
     </style>
-    <!--ui and firebase script-->
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-          rel="stylesheet" type="text/css"/>
-    <!--    firebase-ui-->
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"/>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <!-- Core theme CSS (includes Bootstrap)-->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="/css/styles.css" rel="stylesheet"/>
-
 </head>
 <body>
-<!--search-->
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
-
-<style>
-    .mapboxgl-popup {
-        max-width: 400px;
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    }
-
-    .mapboxgl-ctrl-top-right{
-        top: 8%;
-    }
-    .mapboxgl-ctrl-geocoder {
-        right: 10%;
-    }
-</style>
-
 <nav th:replace="~{fragment/frontend :: navigation}"></nav>
 <div id="map"></div>
-<script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoicGhhbXRydW5naGlldTZkIiwiYSI6ImNrdGJuZHduNzF4aTYyd3Bsa3RyMGxhY3IifQ.jzhAQ1H3SkdOoJi-BYKI8A';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [105.82061007444896, 21.01794812087948],
-        zoom: 12,
-    });
-
-    const urlParams = Array.from(new URLSearchParams(location.search).values());
-    if(urlParams.length != 0) {
-        const lng = parseFloat(urlParams[0]);
-        const lat = parseFloat(urlParams[1]);
-        const marker = new mapboxgl.Marker()
-            .setLngLat([lng, lat])
-            .addTo(map);
-    }
-
-    map.on('load', () => {
-        // Add the control to the map.
-        map.addControl(
-            new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl
-            })
-        );
-
-        map.addSource('places', {
-            'type': 'geojson',
-            'data': 'https://food-review2021.herokuapp.com/api/foodreview/map',
-        });
-        // Add a layer showing the places.
-        map.addLayer({
-            'id': 'places',
-            'type': 'circle',
-            'source': 'places',
-            'paint': {
-                'circle-color': '#4264fb',
-                'circle-radius': 6,
-                'circle-stroke-width': 2,
-                'circle-stroke-color': '#ffffff'
-            }
-        });
-
-        // Create a popup, but don't add it to the map yet.
-        const popup = new mapboxgl.Popup({
-            closeButton: false,
-            closeOnClick: false
-        });
-
-        map.on('mouseenter', 'places', (e) => {
-            // Change the cursor style as a UI indicator.
-            map.getCanvas().style.cursor = 'pointer';
-
-            // Copy coordinates array.
-            const coordinates = e.features[0].geometry.coordinates.slice();
-            const description = e.features[0].properties.description;
-
-
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
-            popup.setLngLat(coordinates).setHTML(description).addTo(map);
-        });
-
-        map.on('mouseleave', 'places', () => {
-            map.getCanvas().style.cursor = '';
-            popup.remove();
-        });
-    });
-
+<script src="/js/map.js">
 </script>
 </body>
 </html>

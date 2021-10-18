@@ -5,11 +5,12 @@ import DAO.CommentDAO;
 import model.Comment;
 
 public class CommentService {
+    private final CommentDAO commentDAO = new CommentDAO();
     public List<Comment> getCommentsByScore(int score){
-        return new CommentDAO().getCommentsByScore(score);
+        return commentDAO.getCommentsByScore(score);
     }
 
     public void addComment(Comment comment){
-        new CommentDAO().addComment(comment);
+        commentDAO.addComment(comment);
     }
 }

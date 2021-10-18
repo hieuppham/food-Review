@@ -15,6 +15,7 @@ import java.util.Map;
 public class MyApplication {
     public TemplateEngine templateEngine;
     private Map<String, IController> controllersByURL;
+
     public MyApplication(final ServletContext servletContext) {
         super();
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
@@ -29,9 +30,8 @@ public class MyApplication {
         this.controllersByURL = new HashMap<>();
         this.controllersByURL.put("/", new HomeController());
         this.controllersByURL.put("/post", new PostController());
-       this.controllersByURL.put("/comment", new CommentController());
-        //this.controllersByURL.put("/write", new WriteController());
-        this.controllersByURL.put("/addPost", new AddPostController());
+        this.controllersByURL.put("/comment", new CommentController());
+        this.controllersByURL.put("/manage", new ManageController());
         this.controllersByURL.put("/video", new VideoController());
         this.controllersByURL.put("/dev", new ApiController());
         this.controllersByURL.put("/map", new MapController());
@@ -39,7 +39,7 @@ public class MyApplication {
 
     public IController resolveControllerForRequest(final HttpServletRequest request) {
         final String path = getRequestPath(request);
-        if(this.controllersByURL.get(path) != null){
+        if (this.controllersByURL.get(path) != null) {
             return this.controllersByURL.get(path);
         }
         return new PageNotFoundController();

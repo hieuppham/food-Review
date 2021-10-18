@@ -10,6 +10,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -2983,6 +2984,7 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #0085A1;
   border-color: #0085A1;
+  padding: 0.4em 1em;
 }
 .btn-primary:hover {
   color: #fff;
@@ -3008,21 +3010,6 @@ textarea.form-control-lg {
   background-color: #0085A1;
   border-color: #0085A1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .btn-danger {
   color: #fff;
@@ -10809,4 +10796,4 @@ header.masthead .site-heading .h1 {
     font-size: 2.25rem;
   }
 }
-/*pagination*/
+

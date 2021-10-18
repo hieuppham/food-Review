@@ -17,7 +17,7 @@
                         <h3 class="subheading"><span th:each="text : *{tags}" th:text="'#'+ ${text} + ' '"></span>
                         </h3>
                         <span th:if="*{date}" class="meta" >
-                                Posted on <span th:text="*{date}">August 24, 2021</span>
+                                Posted on <span th:text="*{formatDate()}">August 24, 2021</span>
                             </span>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
 
                         <p th:each="text : *{texts}" th:text="${text}"></p>
 
-                    <a th:href="@{https://food-review2021.herokuapp.com/map(lng=*{coordinates[0]}, lat=*{coordinates[1]})}" type="button" class="btn btn-primary btn-sm">Go to map</a>
+                    <a th:href="@{http://localhost:8081/map(lng=*{coordinates[0]}, lat=*{coordinates[1]})}" type="button" class="btn btn-primary btn-sm">Go to map</a>
                 </div>
             </div>
         </div>

@@ -16,14 +16,16 @@ import java.util.List;
 
 @Path("/foodreview")
 public class FoodReviewAPI {
+    private final PostService postService = new PostService();
+    private final CommentService commentService = new CommentService();
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")
     public List<Post> getAllPosts(){
         List<Post> list = new ArrayList<>();
-        int numOfPages = new PostService().getTotalPages();
+        int numOfPages = postService.getTotalPages();
         for(int i = 0 ; i < numOfPages; ++i){
-            List<Post> newList = new PostService().getPosts(i+1);
+            List<Post> newList = postService.getPosts(i+1);
             list.addAll(newList);
         }
         return list;
@@ -34,9 +36,8 @@ public class FoodReviewAPI {
     @Path("/post")
     public JSONObject getPosts(@QueryParam("page") int page) {
         JSONObject result = new JSONObject();
-        PostService ps = new PostService();
-        result.put("numberOfPage", ps.getTotalPages());
-        result.put("posts", ps.getPosts(page));
+        result.put("numberOfPage", postService.getTotalPages());
+        result.put("posts", postService.getPosts(page));
         result.put("page", page);
         return result;
     }
@@ -45,7 +46,7 @@ public class FoodReviewAPI {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/post/{score}")
     public Post getPostByScore(@PathParam("score") int score) {
-        return new PostService().getPost(score);
+        return postService.getPost(score);
     }
 
     @GET
@@ -53,8 +54,8 @@ public class FoodReviewAPI {
     @Path("/comment/{post_score}")
     public JSONObject getComments(@PathParam("post_score") int post_score) {
         JSONObject result = new JSONObject();
-        result.put("size", new CommentService().getCommentsByScore(post_score).size());
-        result.put("data", new CommentService().getCommentsByScore(post_score));
+        result.put("size", commentService.getCommentsByScore(post_score).size());
+        result.put("data", commentService.getCommentsByScore(post_score));
         return result;
     }
 
@@ -62,7 +63,7 @@ public class FoodReviewAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/comment/{post_score}")
     public String addComment(Comment comment) {
-        new CommentService().addComment(comment);
+        commentService.addComment(comment);
         return "success";
     }
 //    location api
@@ -74,6 +75,6 @@ public class FoodReviewAPI {
         response.setHeader("Access-Control-Allow-Headers", "CSRF-Token, X-Requested-By, Authorization, Content-Type");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         response.setHeader("Access-Control-Allow-Origin", "*");
-        return new GeoJSON("FeatureCollection", new PostService().getAllFeatures());
+        return new GeoJSON("FeatureCollection", postService.getAllFeatures());
     }
 }

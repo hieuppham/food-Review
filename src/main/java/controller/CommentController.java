@@ -14,7 +14,6 @@ import java.util.Date;
 public class CommentController extends MyController{
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, ITemplateEngine templateEngine) throws Exception {
-        super.process(request, response, servletContext, templateEngine);
         request.setCharacterEncoding("UTF-8");
         int score = Integer.parseInt(request.getParameter("score"));
         String name = request.getParameter("name");
