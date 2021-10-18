@@ -39,7 +39,7 @@ function handleSignedInUser(user) {
     $(".user").removeClass("d-none");
 
     if(user.email == "phamtrunghieu6d@gmail.com"){
-        $("li#manager-form").attr("display", "block");
+        $("li#manager-form").removeAttr("display");
         $("input.uid").val(user.id);
         $("li#manager-form > form > button").removeAttr("disabled");
     }
