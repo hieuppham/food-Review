@@ -91,7 +91,7 @@
                             </div>
                         </form>
                     </div>
-                    <ul id="commentList">
+                    <ul id="commentList" style="list-style-type: none">
                     <li th:each="comment : ${commentList}">
                         <div class="card-body">
                             <div class="d-flex flex-start align-items-center">
@@ -100,7 +100,7 @@
                                      width="60" height="60"/>
                                 <div>
                                     <h6 th:text="${comment.name}" class="fw-bold text-primary mb-1">Lily Coleman</h6>
-                                    <p th:text="${comment.date}" class="text-muted small mb-0">
+                                    <p th:text="${comment.formatDate()}" class="text-muted small mb-0">
                                         Shared publicly - Jan 2020
                                     </p>
                                 </div>
