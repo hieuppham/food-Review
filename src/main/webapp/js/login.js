@@ -39,7 +39,7 @@ function handleSignedInUser(user) {
     $(".user").removeClass("d-none");
 
     if(user.email == "phamtrunghieu6d@gmail.com"){
-        $("li#manager-form").removeAttr("display");
+        $("li#manager-form").css("display", "block");
         $("input.uid").val(user.id);
         $("li#manager-form > form > button").removeAttr("disabled");
     }
@@ -63,6 +63,6 @@ function handleSignedOutUser() {
     $(".comment").attr("disabled", "disabled");
     $(".comment").attr("placeholder", "You have to login to post comment.");
 
-    $("li#manager-form").attr("display", "none");
+    $("li#manager-form").css("display", "none");
     $("li#manager-form > form > button").attr("disabled", "disabled");
 }
