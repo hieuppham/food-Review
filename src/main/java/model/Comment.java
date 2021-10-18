@@ -12,4 +12,9 @@ public class Comment {
     private String contact;
     private String content;
     private Date date;
+    
+    public String formatDate(){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(this.getDate());
+    }
 }
