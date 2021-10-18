@@ -13,7 +13,8 @@ import java.util.Set;
 
 public class PostDAO extends AbsDAO {
     private final int NUMBER_OF_POST_IN_PAGE = 12;
-private final Jedis jedis = getConnection();
+    private final Jedis jedis = getConnection();
+
     public void editPost(Post post) {
         Long scoreL = Long.parseLong(String.valueOf(post.getScore()));
         jedis.zremrangeByScore("food-review", scoreL, scoreL);
@@ -21,7 +22,7 @@ private final Jedis jedis = getConnection();
         jedis.zadd("food-review", scoreL, json);
     }
 
-    public void deletePost(int score){
+    public void deletePost(int score) {
         Long scoreL = Long.parseLong(String.valueOf(score));
         jedis.zremrangeByScore("food-review", scoreL, scoreL);
     }
