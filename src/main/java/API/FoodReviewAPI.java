@@ -71,10 +71,10 @@ public class FoodReviewAPI {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/map")
     public GeoJSON getMap(@Context HttpServletResponse response){
-//         response.setHeader("Access-Control-Allow-Credentials", "true");
-//         response.setHeader("Access-Control-Allow-Headers", "CSRF-Token, X-Requested-By, Authorization, Content-Type");
-//         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-//         response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "CSRF-Token, X-Requested-By, Authorization, Content-Type");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return new GeoJSON("FeatureCollection", postService.getAllFeatures());
     }
 }
