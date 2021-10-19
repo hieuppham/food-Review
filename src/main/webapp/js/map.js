@@ -26,7 +26,7 @@ map.on('load', () => {
 
     map.addSource('places', {
         'type': 'geojson',
-        'data': 'https://food-review2021.herokuapp.com/api/foodreview/map',
+        'data': 'https://food-review2021.herokuapp.com/api/1/foodreview/map',
     });
     // Add a layer showing the places.
     map.addLayer({
