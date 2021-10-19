@@ -66,12 +66,33 @@
         </div>
         <button type="submit" class="add-post btn btn-primary">Edit/Add</button>
     </form>
-    <form action="/manage" method="post" th:if="${post}">
-        <input class="uid" type="hidden" name="uid"/>
-        <input type="hidden" name="action" value="delete">
-        <input type="hidden" name="score" th:value="${post.score}">
-        <button type="submit" class="add-post btn btn-primary">Delete</button>
-    </form>
+    <!-- Button trigger modal -->
+    <button th:if="${post}" type="button" class="add-post btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Delete
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b class="modal-title" id="exampleModalLabel">You sure?</b>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Really want to delete this post?
+                </div>
+                <div class="modal-footer">
+                    <form action="/manage" method="post">
+                        <input class="uid" type="hidden" name="uid"/>
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="score" th:if="${post}" th:value="${post.score}">
+                        <button type="submit" class="add-post btn btn-danger">Delete</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="/js/manage.js"></script>
 <footer th:replace="~{fragment/frontend :: footer}"></footer>

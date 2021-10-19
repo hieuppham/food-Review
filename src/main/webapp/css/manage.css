@@ -52,6 +52,11 @@ label {
     font-weight: bold;
 }
 
+.modal-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
 @media screen and (min-width: 800px) {
     .info-form > div > div.info {
         flex: 4;

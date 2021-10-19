@@ -15,13 +15,12 @@ public class ManageController extends MyController {
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, ITemplateEngine templateEngine) throws Exception {
         super.process(request, response, servletContext, templateEngine);
-        String uid = request.getParameter("uid").trim();
+        request.setCharacterEncoding("UTF-8");
+        String uid = request.getParameter("uid");
         if (uid == null || !uid.equals("sQ1UEjTmyKW0MvYsmOmFIipX3Y52")) {
             response.sendRedirect("/");
         } else {
-            request.setCharacterEncoding("UTF-8");
             int score = request.getParameter("score") != null ? Integer.parseInt(request.getParameter("score").trim()) : -1;
-
             if (request.getMethod().equalsIgnoreCase("get") && score != -1) {
                 Post post = new PostService().getPost(score);
                 ctx.setVariable("post", post);

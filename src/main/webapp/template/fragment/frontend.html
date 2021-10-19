@@ -56,10 +56,10 @@
                             <li><img class="user-avatar rounded-circle shadow-1-strong me-3" width="80"
                                      height="80"></li>
                             <li><b class="user-name"></b></li>
-                            <li id="manager-form" style="display: none">
+                            <li id="manager-form">
                                 <form action="/manage" method="post">
                                     <input class="uid" type="hidden" name="uid"/>
-                                    <button class="btn btn-primary" disabled>Manage</button>
+                                    <button class="btn btn-primary">Manage</button>
                                 </form>
                             </li>
                             <li><a class="btn btn-primary" type="button" onclick="firebase.auth().signOut()">Sign
@@ -115,6 +115,11 @@
 </footer>
 
 <div th:fragment="script">
+    <!--firebase-->
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <!--login-firebse-->
+    <script src="/js/login.js"></script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -123,10 +128,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Core theme JS and other scripts-->
     <script src="/js/scripts.js"></script>
-    <!--firebase-->
-    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
-    <!--login-firebse-->
-    <script src="/js/login.js"></script>
 </div>
 
