@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/foodreview")
+@Path("/1/foodreview")
 public class FoodReviewAPI {
     private final PostService postService = new PostService();
     private final CommentService commentService = new CommentService();
