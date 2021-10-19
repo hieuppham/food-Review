@@ -52,8 +52,8 @@ public class PostDAO extends AbsDAO {
 
     public List<Feature> getAllFeatures() {
         List<Feature> list = new ArrayList<>();
-        Set<String> strPost = jedis.zrange("food-review", 0L, -1L);
-        strPost.forEach(str -> {
+        Set<String> strPosts = jedis.zrangeByScore("food-review", 0L, -1L);
+        strPosts.forEach(str -> {
             Post post = gson.fromJson(str, Post.class);
             Feature feature = new Feature();
 

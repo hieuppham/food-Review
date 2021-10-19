@@ -42,6 +42,9 @@ function handleSignedInUser(user) {
         $("li#manager-form").css("display", "block");
         $("input.uid").val(user.uid);
         $("li#manager-form > form > button").removeAttr("disabled");
+    }else {
+        $("li#manager-form").css("display", "none");
+        $("li#manager-form > form > button").attr("disabled", "disabled");
     }
 
     $(".user-name").text(user.displayName ? user.displayName : "Anonymous");

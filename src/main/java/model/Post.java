@@ -19,19 +19,23 @@ public class Post {
     private List<String> texts;
     private List<String> images;
     private List<String> tags;
-//    desciption = title;
+    //    desciption = title;
     private double[] coordinates;
 
+    //manage -> post date
     public Date stringToDate(String dateStr) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.parse(dateStr);
     }
+
+    //for manage page
     public String dateToString() {
-       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-       return format.format(this.getDate());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(this.getDate());
     }
 
-    public String formatDate(){
+    //for post page
+    public String formatDate() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(this.getDate());
     }
