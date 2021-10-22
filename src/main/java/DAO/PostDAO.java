@@ -45,7 +45,11 @@ public class PostDAO extends AbsDAO {
 
     public Post getPostByScore(int score) {
         Long scoreL = Long.parseLong(String.valueOf(score));
-        String json = jedis.zrangeByScore("food-review", scoreL, scoreL).iterator().next();
+        Set<String> set = jedis.zrangeByScore("food-review", scoreL, scoreL);
+        if(set.isEmpty()){
+            return null;
+        }
+        String json = set.iterator().next();
         Post post = gson.fromJson(json, Post.class);
         return post;
     }

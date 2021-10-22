@@ -54,23 +54,13 @@ function addParagraph() {
     let li = document.createElement("li");
     li.setAttribute("class", "list-group-item");
 
-    let input = document.createElement('input');
-    input.setAttribute("type", "text");
-    input.setAttribute("name", "headers");
-    input.setAttribute("placeholder", "Header");
+    let input = document.createElement("input");
+    input.setAttribute("class", "post-content");
+    input.setAttribute("name", "texts");
+    input.setAttribute("placeholder", "Write your review");
     input.setAttribute("required", "required");
 
     li.append(input);
-    li.append(document.createElement("br"));
-
-    let textarea = document.createElement("textarea");
-    textarea.setAttribute("class", "post-content");
-    textarea.setAttribute("name", "contents");
-    textarea.setAttribute("cols", "40");
-    textarea.setAttribute("rows", "7");
-    textarea.setAttribute("placeholder", "Write your review");
-    textarea.setAttribute("required", "required");
-    li.append(textarea);
     document.getElementById("paragraphs").append(li);
 }
 
@@ -84,7 +74,7 @@ function addHashtag(){
 
     let input = document.createElement('input');
     input.setAttribute("type", "text");
-    input.setAttribute("name", "hashtags");
+    input.setAttribute("name", "tags");
     input.setAttribute("placeholder", "Hashtag");
     input.setAttribute("required", "required");
     li.append(input);

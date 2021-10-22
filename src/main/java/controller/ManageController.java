@@ -7,6 +7,7 @@ import service.PostService;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -20,12 +21,15 @@ public class ManageController extends MyController {
             response.sendRedirect("/");
         } else {
             int score = request.getParameter("score") != null ? Integer.parseInt(request.getParameter("score").trim()) : -1;
+            PostService postService = new PostService();
             if (request.getMethod().equalsIgnoreCase("get") && score != -1) {
-                Post post = new PostService().getPost(score);
+                Post post = postService.getPost(score);
+                if(post == null){
+                    post = new Post(score, null, null, new Date(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new double[]{0,0});
+                }
                 ctx.setVariable("post", post);
             } else if (request.getMethod().equalsIgnoreCase("post") && score != -1 && request.getParameter("action") != null) {
                 String action = request.getParameter("action").trim();
-                PostService postService = new PostService();
                 if (action.equals("edit")) {
                     Post post = new Post();
 
