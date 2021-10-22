@@ -17,12 +17,12 @@ public class ManageController extends MyController {
         super.process(request, response, servletContext, templateEngine);
         request.setCharacterEncoding("UTF-8");
         String uid = request.getParameter("uid");
-        if (uid == null || !uid.equals("sQ1UEjTmyKW0MvYsmOmFIipX3Y52")) {
+        if (uid == null || !uid.equals(System.getenv("UID"))) {
             response.sendRedirect("/");
         } else {
             int score = request.getParameter("score") != null ? Integer.parseInt(request.getParameter("score").trim()) : -1;
             PostService postService = new PostService();
-            if (request.getMethod().equalsIgnoreCase("get") && score != -1) {
+            if (request.getMethod().equalsIgnoreCase("post") && score != -1 && request.getParameter("action") == null) {
                 Post post = postService.getPost(score);
                 if(post == null){
                     post = new Post(score, null, null, new Date(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new double[]{0,0});

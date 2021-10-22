@@ -9,9 +9,9 @@
 <nav th:replace="~{fragment/frontend :: navigation}"></nav>
 
 <div class="main-container">
-    <form action="/manage" method="get" class="find-form">
+    <form action="/manage" method="post" class="find-form">
         <input class="uid" type="hidden" name="uid"/>
-        <input type="text" name="score" placeholder="Type post score">
+        <input type="number" name="score" placeholder="Type post score">
         <button class="btn btn-primary" type="submit">Find</button>
     </form>
 
