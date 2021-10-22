@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class PostDAO extends AbsDAO {
     private final int NUMBER_OF_POST_IN_PAGE = 12;
-    private final Jedis jedis = getConnection();
+    private static final Jedis jedis = getConnection();
 
     public void editPost(Post post) {
         Long scoreL = Long.parseLong(String.valueOf(post.getScore()));
