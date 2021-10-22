@@ -17,7 +17,7 @@ public class ManageController extends MyController {
         super.process(request, response, servletContext, templateEngine);
         request.setCharacterEncoding("UTF-8");
         String uid = request.getParameter("uid");
-        if (uid == null || !uid.equals(System.getenv("user_id"))) {
+        if (uid == null || !uid.equals(System.getenv("abc"))) {
             response.sendRedirect("/");
         } else {
             int score = request.getParameter("score") != null ? Integer.parseInt(request.getParameter("score").trim()) : -1;
