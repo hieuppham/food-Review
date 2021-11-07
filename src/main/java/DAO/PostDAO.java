@@ -61,7 +61,7 @@ public class PostDAO extends AbsDAO {
             Post post = gson.fromJson(str, Post.class);
             Feature feature = new Feature();
 
-            String description = post.getTitle();
+            String description = "<a href='https://food-review2021.herokuapp.com/post?score=" + post.getScore() + "' target='_blank'>" + post.getTitle() + "</a>";
             feature.setProperties(new Properties(description));
 
             double[] coordinates = post.getCoordinates();
