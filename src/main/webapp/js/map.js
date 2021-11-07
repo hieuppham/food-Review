@@ -63,11 +63,15 @@ map.on('load', () => {
         popup.setLngLat(coordinates).setHTML(description).addTo(map);
     });
 
+    map.on('mouseleave', 'places', () => {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+    });
 
     map.on('click', 'places', (e) => {
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
-        const description = e.features[0].properties.description;
+        const description =e.features[0].properties.description;
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -80,10 +84,5 @@ map.on('load', () => {
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
-    });
-
-    map.on('mouseleave', 'places', () => {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
     });
 });
