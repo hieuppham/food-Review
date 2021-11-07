@@ -68,7 +68,7 @@ map.on('load', () => {
     map.on('click', 'places', (e) => {
         // Copy coordinates array.
         const coordinates = e.features[0].geometry.coordinates.slice();
-        const description = `<a href="https://food-review2021.herokuapp.com/post?score=${score} target="_blank">${e.features[0].properties.description}</a>`;
+        const description = `<a href="https://food-review2021.herokuapp.com/post?score=${score}>` + e.features[0].properties.description +'</a>';
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
