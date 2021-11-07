@@ -8,8 +8,9 @@ const map = new mapboxgl.Map({
 
 const urlParams = Array.from(new URLSearchParams(location.search).values());
 if(urlParams.length != 0) {
-    const lng = parseFloat(urlParams[0]);
-    const lat = parseFloat(urlParams[1]);
+    var score = parseInt(urlParams[0]);
+    const lng = parseFloat(urlParams[1]);
+    const lat = parseFloat(urlParams[2]);
     const marker = new mapboxgl.Marker({color: '#F84C4C'})
         .setLngLat([lng, lat])
         .addTo(map);
@@ -61,6 +62,25 @@ map.on('load', () => {
         }
 
         popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+
+    map.on('click', 'places', (e) => {
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = `<a href="https://food-review2021.herokuapp.com/post?score=${score} target="_blank">${e.features[0].properties.description}</a>`;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
     });
 
     map.on('mouseleave', 'places', () => {
