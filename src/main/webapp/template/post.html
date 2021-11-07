@@ -57,7 +57,7 @@
 
                         <p th:each="text : *{texts}" th:text="${text}"></p>
 
-                    <a th:href="@{https://food-review2021.herokuapp.com/map(lng=*{coordinates[0]}, lat=*{coordinates[1]})}" type="button" class="btn btn-primary btn-sm">Go to map</a>
+                    <a th:href="@{https://food-review2021.herokuapp.com/map(score=*{score}, lng=*{coordinates[0]}, lat=*{coordinates[1]})}" type="button" class="btn btn-primary btn-sm">Go to map</a>
                 </div>
             </div>
         </div>
