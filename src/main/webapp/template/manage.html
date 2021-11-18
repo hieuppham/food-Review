@@ -13,7 +13,7 @@
         <input class="uid" type="hidden" name="uid"/>
         <input type="number" name="score" placeholder="Type post score">
         <button class="btn btn-primary" type="submit">Find</button>
-        <a class="btn btn-primary" type="button" th:if="${post}" th:href="@{https://food-review2021.herokuapp.com/post(score = ${post.score})}">View Post</button>
+        <a class="btn btn-primary" type="button" th:if="${post}" th:href="@{https://food-review2021.herokuapp.com/post(score = ${post.score})}">View Post</a>
     </form>
 
     <form action="/manage" method="post" class="info-form" th:if="${post}" th:object="${post}" onkeyup="blankCheck()">
